@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  /* Cores Customizadas */
+  --color-quartz: #F7D7D7;
+  --color-gold: #D4AF37;
+  --color-offwhite: #FAF9F6;
+  --color-aesthetic-gray: #4A4A4A;
+
+  /* Fontes (Playfair e Montserrat precisam estar importadas no index.html ou via @import) */
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Montserrat", sans-serif;
+}
+
+/* Import das fontes do Google */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
+
+/* Reset básico para o estilo 'Soft Aesthetic' */
+body {
+  background-color: var(--color-offwhite);
+  color: var(--color-aesthetic-gray);
+  font-family: var(--font-sans);
+}
