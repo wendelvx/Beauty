@@ -1,126 +1,113 @@
 import { useState } from 'react';
-import { Send } from 'lucide-react';
+import { Send, ClipboardCheck, ShieldCheck } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function PreAssessment() {
   const [formData, setFormData] = useState({
     nome: '',
-    objetivo: 'Estética',
+    objetivo: 'Recuperação de Performance',
     dor: ''
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Formatação da mensagem para o WhatsApp
-    const mensagem = `Olá Gislayne! Me chamo ${formData.nome}.%0A%0AGostaria de uma avaliação personalizada.%0A%0A*Meu objetivo:* ${formData.objetivo}%0A*Minha queixa principal:* ${formData.dor}`;
+    const mensagem = `Olá Gislayne!%0A%0A*PROTOCOLO DE PRÉ-AVALIAÇÃO*%0A%0A*Nome:* ${formData.nome}%0A*Foco do Tratamento:* ${formData.objetivo}%0A*Descrição da Queixa:* ${formData.dor}%0A%0AGostaria de agendar minha avaliação clínica para iniciar o tratamento.`;
     
-    // Link configurado com o seu número: 55 (Brasil) + 88 (DDD) + 88145310
     const url = `https://wa.me/558888145310?text=${mensagem}`; 
-    
     window.open(url, '_blank');
   };
 
-  const formVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 }
-    }
-  };
-
-  const inputVariants = {
-    hidden: { opacity: 0, x: -10 },
-    visible: { opacity: 1, x: 0 }
-  };
-
   return (
-    /* ID "avaliacao" mantido para os botões de scroll funcionarem */
-    <section id="avaliacao" className="py-24 bg-quartz/10 overflow-hidden">
-      <motion.div 
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="max-w-3xl mx-auto px-6 bg-white p-10 md:p-16 rounded-[3rem] shadow-xl border border-white"
-      >
-        <div className="text-center mb-10">
-          <motion.h2 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="font-serif text-3xl md:text-4xl text-aesthetic-gray mb-4"
-          >
-            Sua jornada de <span className="italic text-gold">transformação</span> começa aqui
-          </motion.h2>
-          <p className="font-sans text-sm text-aesthetic-gray/60 italic">
-            Preencha os dados abaixo para uma pré-análise da sua necessidade.
-          </p>
-        </div>
-
-        <motion.form 
-          variants={formVariants}
-          initial="hidden"
-          whileInView="visible"
+    <section id="agendamento" className="py-24 bg-offwhite overflow-hidden">
+      <div className="max-w-4xl mx-auto px-6">
+        
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          onSubmit={handleSubmit} 
-          className="space-y-6"
+          transition={{ duration: 0.8 }}
+          className="bg-white p-8 md:p-16 rounded-[3.5rem] shadow-2xl shadow-accent/5 border border-accent/5 relative"
         >
-          {/* Campo Nome */}
-          <motion.div variants={inputVariants} className="group">
-            <label className="block text-[10px] uppercase tracking-[0.2em] text-gold font-bold mb-2 ml-4">Seu Nome</label>
-            <input 
-              required
-              type="text" 
-              placeholder="Como quer ser chamada?"
-              className="w-full px-8 py-5 rounded-full bg-offwhite border border-transparent focus:border-gold/20 focus:bg-white focus:ring-4 focus:ring-gold/5 transition-all outline-none text-aesthetic-gray placeholder:text-aesthetic-gray/30"
-              onChange={(e) => setFormData({...formData, nome: e.target.value})}
-            />
-          </motion.div>
-
-          {/* Grid de Objetivo e Queixa */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <motion.div variants={inputVariants} className="group">
-              <label className="block text-[10px] uppercase tracking-[0.2em] text-gold font-bold mb-2 ml-4">Objetivo</label>
-              <div className="relative">
-                <select 
-                  className="w-full px-8 py-5 rounded-full bg-offwhite border border-transparent focus:border-gold/20 focus:bg-white focus:ring-4 focus:ring-gold/5 transition-all outline-none text-aesthetic-gray appearance-none cursor-pointer"
-                  onChange={(e) => setFormData({...formData, objetivo: e.target.value})}
-                >
-                  <option value="Estética">Estética (Corpo/Rosto)</option>
-                  <option value="Alívio de Dores">Alívio de Dores</option>
-                  <option value="Performance">Performance/Recuperação</option>
-                  <option value="Relaxamento">Relaxamento Total</option>
-                </select>
-                <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-gold/50 text-xs">
-                  ▼
-                </div>
-              </div>
-            </motion.div>
-            
-            <motion.div variants={inputVariants} className="group">
-              <label className="block text-[10px] uppercase tracking-[0.2em] text-gold font-bold mb-2 ml-4">Principal Queixa</label>
-              <input 
-                type="text" 
-                placeholder="Ex: Dor nas costas, retenção..."
-                className="w-full px-8 py-5 rounded-full bg-offwhite border border-transparent focus:border-gold/20 focus:bg-white focus:ring-4 focus:ring-gold/5 transition-all outline-none text-aesthetic-gray placeholder:text-aesthetic-gray/30"
-                onChange={(e) => setFormData({...formData, dor: e.target.value})}
-              />
-            </motion.div>
+          {/* Badge de Segurança Clínica */}
+          <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-accent text-white px-6 py-2 rounded-full flex items-center gap-2 shadow-lg">
+            <ShieldCheck size={14} className="text-primary" />
+            <span className="text-[9px] uppercase font-bold tracking-[0.2em]">Ambiente Seguro & Sigiloso</span>
           </div>
 
-          {/* Botão de Envio */}
-          <motion.button 
-            variants={inputVariants}
-            whileHover={{ scale: 1.02, backgroundColor: '#C4A02F' }} 
-            whileTap={{ scale: 0.98 }}
-            type="submit"
-            className="w-full bg-gold text-white py-6 rounded-full font-sans font-bold uppercase tracking-[0.25em] text-xs transition-all flex items-center justify-center gap-3 shadow-xl shadow-gold/20"
-          >
-            Enviar para Especialista <Send className="w-4 h-4" />
-          </motion.button>
-        </motion.form>
-      </motion.div>
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-2xl text-primary mb-6">
+              <ClipboardCheck size={32} />
+            </div>
+            <h2 className="font-serif text-3xl md:text-5xl text-accent mb-4">
+              Protocolo de <span className="italic text-primary font-light">Pré-Avaliação</span>
+            </h2>
+            <p className="font-sans text-accent/60 max-w-md mx-auto text-sm leading-relaxed">
+              Para um atendimento de precisão, preciso entender como seu corpo se manifesta. 
+              Preencha os dados abaixo para darmos início à sua análise funcional.
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              
+              {/* Campo Nome */}
+              <div className="space-y-2">
+                <label className="text-[10px] uppercase tracking-[0.3em] text-accent font-bold ml-4">Nome Completo</label>
+                <input 
+                  required
+                  type="text" 
+                  placeholder="Como gostaria de ser chamada?"
+                  className="w-full px-8 py-5 rounded-2xl bg-offwhite border border-transparent focus:border-primary/30 focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all outline-none text-accent placeholder:text-accent/30 font-medium"
+                  onChange={(e) => setFormData({...formData, nome: e.target.value})}
+                />
+              </div>
+
+              {/* Campo Objetivo Técnico */}
+              <div className="space-y-2">
+                <label className="text-[10px] uppercase tracking-[0.3em] text-accent font-bold ml-4">Objetivo Principal</label>
+                <div className="relative">
+                  <select 
+                    className="w-full px-8 py-5 rounded-2xl bg-offwhite border border-transparent focus:border-primary/30 focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all outline-none text-accent appearance-none cursor-pointer font-medium"
+                    onChange={(e) => setFormData({...formData, objetivo: e.target.value})}
+                  >
+                    <option value="Performance e Recovery">Recuperação de Performance (Treino)</option>
+                    <option value="Tratamento de Dor Crônica">Tratamento de Dor Crônica</option>
+                    <option value="Gestão de Estresse e Tensão">Gestão de Estresse & Tensão</option>
+                    <option value="Estética Funcional">Estética Funcional & Contorno</option>
+                  </select>
+                  <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-primary">
+                    <Send size={14} className="rotate-90" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Campo de Queixa Detalhada */}
+            <div className="space-y-2">
+              <label className="text-[10px] uppercase tracking-[0.3em] text-accent font-bold ml-4">Descrição da Queixa ou Limitação</label>
+              <textarea 
+                rows="3"
+                placeholder="Ex: Sinto um peso nos ombros ao final do dia / Dor aguda ao treinar pernas..."
+                className="w-full px-8 py-5 rounded-3xl bg-offwhite border border-transparent focus:border-primary/30 focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all outline-none text-accent placeholder:text-accent/30 font-medium resize-none"
+                onChange={(e) => setFormData({...formData, dor: e.target.value})}
+              />
+            </div>
+
+            {/* Botão de Envio com Autoridade */}
+            <motion.button 
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              type="submit"
+              className="w-full bg-accent text-white py-6 rounded-2xl font-sans font-bold uppercase tracking-[0.3em] text-[10px] transition-all flex items-center justify-center gap-4 shadow-2xl shadow-accent/20 hover:bg-primary cursor-pointer"
+            >
+              Solicitar Análise e Agendamento
+              <Send className="w-4 h-4" />
+            </motion.button>
+          </form>
+
+        </motion.div>
+      </div>
     </section>
   );
 }

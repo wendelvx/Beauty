@@ -1,35 +1,35 @@
-import { Sparkles, Activity, Target, Zap } from 'lucide-react';
+import { Sparkles, Activity, Target, Zap, ChevronRight, Wind } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function Services() {
   const services = [
     {
-      title: "Massoterapia Avançada",
-      benefit: "Alívio de tensões com base anatômica",
-      description: "Protocolos manuais profundos para quem busca desligar do estresse e recuperar o vigor muscular.",
-      icon: <Sparkles className="w-6 h-6" />,
-      cta: "Ver disponibilidade"
+      title: "Terapia Manual Avançada",
+      benefit: "Alívio imediato e libertação",
+      description: "Protocolos manuais profundos para desativar o ciclo do estresse. Foco em cefaleias tensionais e rigidez cervical.",
+      icon: <Wind className="w-6 h-6" />,
+      cta: "Recuperar conforto"
     },
     {
-      title: "Técnicas Instrumentais (MITM)",
-      benefit: "Liberação miofascial de alta precisão",
-      description: "Uso de raspadores e ventosas para tratar aderências teciduais e melhorar a mobilidade instantaneamente.",
+      title: "Liberação Instrumental (MITM)",
+      benefit: "Precisão cirúrgica tecidual",
+      description: "Uso de raspadores e ventosas para tratar aderências que impedem o movimento. Tecnologia aplicada ao toque.",
       icon: <Target className="w-6 h-6" />,
-      cta: "Como funciona?"
+      cta: "Eliminar restrições"
     },
     {
-      title: "Recuperação Funcional",
-      benefit: "Performance e gestão da dor",
-      description: "Aplicação de Dry Needling e Kinesio Taping para acelerar a recuperação e eliminar pontos de gatilho.",
+      title: "Recovery & Performance",
+      benefit: "Aceleração de resultados",
+      description: "Dry Needling e ventosaterapia para quem treina e busca reduzir o tempo de recuperação pós-esforço.",
       icon: <Activity className="w-6 h-6" />,
-      cta: "Voltar ao movimento"
+      cta: "Voltar ao treino"
     },
     {
-      title: "Estética Facial e Corporal",
-      benefit: "Protocolos exclusivos e personalizados",
-      description: "Tratamentos que unem tecnologia e ciência para realçar sua beleza natural com resultados duradouros.",
+      title: "Estética Científica",
+      benefit: "Saúde e funcionalidade dérmica",
+      description: "Tratamentos faciais e corporais personalizados que unem o peso acadêmico à tecnologia estética.",
       icon: <Zap className="w-6 h-6" />,
-      cta: "Realçar minha beleza"
+      cta: "Avaliar minha pele"
     }
   ];
 
@@ -46,93 +46,91 @@ export default function Services() {
     visible: { 
       opacity: 1, 
       y: 0, 
-      transition: { duration: 0.7, ease: "easeOut" } 
+      transition: { duration: 0.6, ease: "easeOut" } 
     }
   };
 
-  // Função para scroll suave até o formulário
   const scrollToAssessment = () => {
-    const element = document.getElementById('avaliacao');
+    // Apontando para #agendamento conforme definido no App.jsx
+    const element = document.getElementById('agendamento');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   return (
-    <section id="procedimentos" className="py-24 bg-offwhite">
+    <section id="servicos" className="py-24 bg-offwhite">
       <div className="max-w-7xl mx-auto px-6">
         
-        {/* Cabeçalho Animado */}
+        {/* Cabeçalho Técnico */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="flex flex-col items-center text-center mb-16"
+          className="flex flex-col items-center text-center mb-20"
         >
-          <motion.div
-            animate={{ 
-              opacity: [0.5, 1, 0.5],
-              scale: [0.9, 1.1, 0.9],
-              rotate: [0, 5, -5, 0]
-            }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="mb-4 text-gold"
-          >
-            <Sparkles className="w-10 h-10 drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]" />
-          </motion.div>
+          <span className="font-sans text-primary uppercase tracking-[0.4em] text-[10px] font-bold mb-4">
+            Especialidades Terapêuticas
+          </span>
           
-          <h2 className="font-serif text-4xl md:text-5xl text-aesthetic-gray mb-6">
-            Experiências <span className="italic text-gold">Transformadoras</span>
+          <h2 className="font-serif text-4xl md:text-5xl text-accent mb-6">
+            Soluções para um <span className="italic text-primary">corpo em alta performance</span>
           </h2>
-          <p className="font-sans text-aesthetic-gray/70 max-w-2xl mx-auto">
-            Cada corpo é único. Por isso, nossos protocolos são desenhados sob medida, 
-            unindo o toque humano à precisão científica.
+          <p className="font-sans text-accent/70 max-w-2xl mx-auto leading-relaxed">
+            Dor não é normal. Nossos tratamentos são desenhados para devolver a mobilidade 
+            e o bem-estar que o seu estilo de vida exige.
           </p>
         </motion.div>
 
-        {/* Grade de Serviços com Stagger */}
+        {/* Grade de Serviços */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
         >
           {services.map((service, index) => (
             <motion.div 
               key={index}
               variants={cardVariants}
-              className="group bg-white p-8 rounded-3xl border border-quartz/20 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col h-full"
+              className="group bg-white p-10 rounded-[2.5rem] border border-accent/5 shadow-sm hover:shadow-2xl hover:shadow-accent/5 transition-all duration-500 flex flex-col h-full"
             >
-              <div className="bg-quartz/30 w-12 h-12 rounded-2xl flex items-center justify-center text-gold mb-6 group-hover:bg-gold group-hover:text-white transition-colors duration-500">
+              <div className="bg-offwhite w-14 h-14 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-inner">
                 {service.icon}
               </div>
               
-              <h3 className="font-serif text-xl text-aesthetic-gray mb-2">
+              <h3 className="font-serif text-xl text-accent mb-2 tracking-tight">
                 {service.title}
               </h3>
               
-              <span className="font-sans text-xs font-bold uppercase tracking-widest text-gold mb-4 block">
+              <span className="font-sans text-[10px] font-bold uppercase tracking-widest text-primary mb-6 block border-l-2 border-primary/20 pl-3">
                 {service.benefit}
               </span>
               
-              <p className="font-sans text-sm text-aesthetic-gray/60 leading-relaxed flex-grow">
+              <p className="font-sans text-sm text-accent/60 leading-relaxed flex-grow">
                 {service.description}
               </p>
 
-              {/* Botão funcional com Scroll */}
-              <motion.button 
-                whileHover={{ x: 5 }}
-                whileTap={{ scale: 0.95 }}
+              <button 
                 onClick={scrollToAssessment}
-                className="mt-8 text-[10px] uppercase font-bold tracking-[0.15em] text-aesthetic-gray group-hover:text-gold transition-colors flex items-center gap-3 border-b border-transparent group-hover:border-gold pb-1 w-fit cursor-pointer"
+                className="mt-10 flex items-center justify-between w-full p-4 rounded-xl border border-accent/5 bg-offwhite/50 text-accent font-sans text-[10px] font-bold uppercase tracking-widest group-hover:bg-accent group-hover:text-white transition-all duration-300 cursor-pointer"
               >
-                {service.cta} <span className="text-lg">→</span>
-              </motion.button>
+                {service.cta}
+                <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
+              </button>
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Nota Técnica de Rodapé da Seção */}
+        <motion.p 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.5 }}
+          className="text-center mt-16 font-sans text-[9px] uppercase tracking-[0.3em] text-accent"
+        >
+          *Todos os procedimentos são precedidos por avaliação clínica rigorosa.
+        </motion.p>
       </div>
     </section>
   );
