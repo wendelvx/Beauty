@@ -1,26 +1,29 @@
 // src/components/KittyBow.jsx
 
-// Este componente aceita 'className' para que possamos mudar a cor e o tamanho onde quisermos.
-export default function KittyBow({ className = "w-6 h-6 text-gold" }) {
+export default function KittyBow({ 
+  className = "w-6 h-6 text-primary", 
+  filled = true, // Adicionamos a opção de ser preenchido por padrão
+  strokeWidth = "2.5"
+}) {
   return (
     <svg 
-      viewBox="0 0 100 65" // Viewbox ajustado para a proporção do laço
-      fill="none" 
+      viewBox="0 0 100 70" 
+      fill={filled ? "currentColor" : "none"} // Preenchimento sólido para mais impacto
       xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      stroke="currentColor" // Usa a cor do texto definida no Tailwind (ex: text-gold)
-      strokeWidth="3"       // Espessura da linha (ajuste se quiser mais grosso/fino)
+      className={`${className} transition-all duration-300`}
+      stroke="currentColor" 
+      strokeWidth={strokeWidth}
       strokeLinecap="round" 
       strokeLinejoin="round"
     >
-      {/* O nó central */}
-      <ellipse cx="50" cy="32.5" rx="10" ry="9" />
+      {/* Lado Esquerdo - Curvas mais arredondadas e 'cheias' */}
+      <path d="M42 35C42 15 15 5 8 22C0 40 5 60 15 62C30 65 42 50 42 35Z" />
       
-      {/* A parte esquerda do laço (ligeiramente inclinada) */}
-      <path d="M41 28C35 20 20 15 10 20C0 25 0 40 10 45C20 50 35 45 41 37" />
-      
-      {/* A parte direita do laço */}
-      <path d="M59 28C65 20 80 15 90 20C100 25 100 40 90 45C80 50 65 45 59 37" />
+      {/* Lado Direito - Espelhado com precisão */}
+      <path d="M58 35C58 15 85 5 92 22C100 40 95 60 85 62C70 65 58 50 58 35Z" />
+
+      {/* Círculo Central - O nó do laço, agora um círculo perfeito para simetria clínica */}
+      <circle cx="50" cy="35" r="11" fill={filled ? "currentColor" : "white"} />
     </svg>
   );
 }
