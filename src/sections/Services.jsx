@@ -34,22 +34,22 @@ export default function Services() {
   ];
 
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 0.4 }, // Inicia semi-visível para evitar o vácuo visual
     visible: {
       opacity: 1,
       transition: { 
-        staggerChildren: 0.08, // Reduzido para 0.08 para rapidez no toque
-        delayChildren: 0.1 
+        staggerChildren: 0.06, // Cascata ultra rápida para acompanhar o scroll
+        delayChildren: 0.02 
       }
     }
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 15 }, // Deslocamento menor (15px) evita a sensação de "subida pesada"
+    hidden: { opacity: 0, y: 10 }, // Reduzido o deslocamento vertical para maior sobriedade
     visible: { 
       opacity: 1, 
       y: 0, 
-      transition: { duration: 0.5, ease: "easeOut" } 
+      transition: { duration: 0.4, ease: [0.215, 0.61, 0.355, 1] } // Easing premium (clínico)
     }
   };
 
@@ -66,9 +66,10 @@ export default function Services() {
         
         {/* Cabeçalho Técnico */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0.5, y: -10 }} // Começa com presença visual
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
           className="flex flex-col items-center text-center mb-12 md:mb-20"
         >
           <span className="font-sans text-primary uppercase tracking-[0.4em] text-[10px] font-bold mb-4">
@@ -84,12 +85,12 @@ export default function Services() {
           </p>
         </motion.div>
 
-        {/* Grade de Serviços com Gatilho Rápido */}
+        {/* Grade de Serviços com Revelação Imediata */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }} // Ativa com apenas 10% de visibilidade
+          viewport={{ once: true, amount: 0.1 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
         >
           {services.map((service, index) => (
@@ -127,7 +128,7 @@ export default function Services() {
 
         {/* Nota Técnica */}
         <motion.p 
-          initial={{ opacity: 0 }}
+          initial={{ opacity: 0.3 }}
           whileInView={{ opacity: 0.5 }}
           viewport={{ once: true }}
           className="text-center mt-12 md:mt-16 font-sans text-[9px] uppercase tracking-[0.3em] text-accent px-4"

@@ -22,22 +22,22 @@ export default function Authority() {
   ];
 
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 0.3 }, // Começa com opacidade parcial para evitar o vácuo visual
     visible: {
       opacity: 1,
       transition: { 
-        staggerChildren: 0.1, // Reduzido de 0.2 para ser mais fluido no mobile
-        delayChildren: 0.1 
+        staggerChildren: 0.05, // Quase instantâneo, mas ainda mantém a hierarquia
+        delayChildren: 0.02
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 15 }, // Reduzido o deslocamento vertical
+    hidden: { opacity: 0, y: 10 }, 
     visible: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 0.5, ease: "easeOut" }
+      transition: { duration: 0.4, ease: [0.215, 0.61, 0.355, 1] } // Ease-out mais natural
     }
   };
 
@@ -47,9 +47,10 @@ export default function Authority() {
         
         {/* Cabeçalho de Autoridade */}
         <motion.div 
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0.5, y: -10 }} // Opacidade inicial maior evita o 'pisca' branco
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }} // Trigger mais sensível
+          viewport={{ once: true, amount: 0.1 }} // Dispara muito mais rápido ao entrar na tela
+          transition={{ duration: 0.6 }}
           className="text-center mb-12 md:mb-20 flex flex-col items-center"
         >
           <span className="font-sans text-primary uppercase tracking-[0.4em] text-[10px] font-bold mb-4">
@@ -71,7 +72,7 @@ export default function Authority() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }} // Trigger mais rápido no scroll
+          viewport={{ once: true, amount: 0.1 }}
           className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
         >
           {credentials.map((item, index) => (
@@ -95,15 +96,14 @@ export default function Authority() {
 
         {/* Bloco de Citação - Promessa Central */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0.6 }} // Começa semi-visível
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.7 }}
           className="mt-16 md:mt-24 p-8 md:p-16 bg-accent rounded-[2.5rem] md:rounded-[3.5rem] flex flex-col md:flex-row items-center gap-10 md:gap-12 relative overflow-hidden"
         >
           <div className="absolute inset-0 bg-radial-[at_top_right] from-white/5 to-transparent pointer-events-none" />
 
-          {/* Foto da Especialista */}
           <div className="relative shrink-0">
             <div className="w-32 h-32 md:w-56 md:h-56 rounded-2xl md:rounded-3xl overflow-hidden border-2 border-primary/30 shadow-2xl rotate-2">
               <img 
