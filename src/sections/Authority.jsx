@@ -21,23 +21,24 @@ export default function Authority() {
     }
   ];
 
+  // Variantes ajustadas para Opacidade Total (Remove o Blink)
   const containerVariants = {
-    hidden: { opacity: 0.3 }, // Começa com opacidade parcial para evitar o vácuo visual
+    hidden: { opacity: 1 }, 
     visible: {
       opacity: 1,
       transition: { 
-        staggerChildren: 0.05, // Quase instantâneo, mas ainda mantém a hierarquia
+        staggerChildren: 0.05,
         delayChildren: 0.02
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 10 }, 
+    hidden: { opacity: 1, y: 0 }, 
     visible: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 0.4, ease: [0.215, 0.61, 0.355, 1] } // Ease-out mais natural
+      transition: { duration: 0.4, ease: [0.215, 0.61, 0.355, 1] }
     }
   };
 
@@ -45,12 +46,11 @@ export default function Authority() {
     <section id="autoridade" className="py-16 md:py-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         
-        {/* Cabeçalho de Autoridade */}
+        {/* Cabeçalho de Autoridade - Estabilizado */}
         <motion.div 
-          initial={{ opacity: 0.5, y: -10 }} // Opacidade inicial maior evita o 'pisca' branco
+          initial={{ opacity: 1, y: 0 }} 
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }} // Dispara muito mais rápido ao entrar na tela
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.1 }}
           className="text-center mb-12 md:mb-20 flex flex-col items-center"
         >
           <span className="font-sans text-primary uppercase tracking-[0.4em] text-[10px] font-bold mb-4">
@@ -67,7 +67,7 @@ export default function Authority() {
           </div>
         </motion.div>
 
-        {/* Grade de Credenciais */}
+        {/* Grade de Credenciais - Fluxo Contínuo */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"
@@ -94,12 +94,11 @@ export default function Authority() {
           ))}
         </motion.div>
 
-        {/* Bloco de Citação - Promessa Central */}
+        {/* Bloco de Citação - Sem Oscilação */}
         <motion.div 
-          initial={{ opacity: 0.6 }} // Começa semi-visível
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 1, y: 0 }} 
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.7 }}
           className="mt-16 md:mt-24 p-8 md:p-16 bg-accent rounded-[2.5rem] md:rounded-[3.5rem] flex flex-col md:flex-row items-center gap-10 md:gap-12 relative overflow-hidden"
         >
           <div className="absolute inset-0 bg-radial-[at_top_right] from-white/5 to-transparent pointer-events-none" />

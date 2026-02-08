@@ -33,23 +33,24 @@ export default function Services() {
     }
   ];
 
+  // Estabilização: Opacidade 1 remove qualquer "pisca" durante o carregamento
   const containerVariants = {
-    hidden: { opacity: 0.4 }, // Inicia semi-visível para evitar o vácuo visual
+    hidden: { opacity: 1 }, 
     visible: {
       opacity: 1,
       transition: { 
-        staggerChildren: 0.06, // Cascata ultra rápida para acompanhar o scroll
+        staggerChildren: 0.05,
         delayChildren: 0.02 
       }
     }
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 10 }, // Reduzido o deslocamento vertical para maior sobriedade
+    hidden: { opacity: 1, y: 0 }, 
     visible: { 
       opacity: 1, 
       y: 0, 
-      transition: { duration: 0.4, ease: [0.215, 0.61, 0.355, 1] } // Easing premium (clínico)
+      transition: { duration: 0.4, ease: [0.215, 0.61, 0.355, 1] } 
     }
   };
 
@@ -64,12 +65,11 @@ export default function Services() {
     <section id="servicos" className="py-16 md:py-24 bg-offwhite">
       <div className="max-w-7xl mx-auto px-6">
         
-        {/* Cabeçalho Técnico */}
+        {/* Cabeçalho Técnico - Estabilizado para evitar vácuo visual */}
         <motion.div 
-          initial={{ opacity: 0.5, y: -10 }} // Começa com presença visual
+          initial={{ opacity: 1, y: 0 }} 
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.1 }}
           className="flex flex-col items-center text-center mb-12 md:mb-20"
         >
           <span className="font-sans text-primary uppercase tracking-[0.4em] text-[10px] font-bold mb-4">
@@ -85,7 +85,7 @@ export default function Services() {
           </p>
         </motion.div>
 
-        {/* Grade de Serviços com Revelação Imediata */}
+        {/* Grade de Serviços - Renderização Firme e Instantânea */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"
@@ -126,9 +126,9 @@ export default function Services() {
           ))}
         </motion.div>
 
-        {/* Nota Técnica */}
+        {/* Nota Técnica - Mantida estável com opacidade de leitura */}
         <motion.p 
-          initial={{ opacity: 0.3 }}
+          initial={{ opacity: 0.5 }} 
           whileInView={{ opacity: 0.5 }}
           viewport={{ once: true }}
           className="text-center mt-12 md:mt-16 font-sans text-[9px] uppercase tracking-[0.3em] text-accent px-4"
