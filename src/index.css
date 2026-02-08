@@ -1,42 +1,43 @@
 @import "tailwindcss";
 
 @theme {
-  /* Cores Customizadas - Revisitadas para Autoridade Acolhedora */
-  --color-primary: #D4AF37; /* Gold (Autoridade/Valor) */
-  --color-accent: #2C3E50;  /* Deep Slate (Confiança Clínica e Contraste) */
-  --color-skin: #E9DCC9;    /* Nude/Sand (Substitui o rosa por algo mais anatômico/orgânico) */
+  /* Cores Customizadas - Autoridade Acolhedora */
+  --color-primary: #D4AF37; 
+  --color-accent: #2C3E50;  
+  --color-skin: #E9DCC9;    
   --color-offwhite: #FAF9F6;
   --color-text-main: #333333;
 
-  /* Fontes */
+  /* Fontes - Referenciando o que foi carregado no HTML */
   --font-serif: "Playfair Display", serif;
   --font-sans: "Montserrat", sans-serif;
 
-  /* Spacing & Custom */
+  /* Animações */
   --animate-bounce-slow: bounce-slow 3s infinite ease-in-out;
 }
 
-/* Import das fontes do Google com pesos específicos para Copywriting */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
-
-/* Estilização Global */
 @layer base {
   body {
     @apply bg-[var(--color-offwhite)] text-[var(--color-text-main)] font-sans antialiased;
   }
 
-  /* Títulos de Autoridade */
-  h1, h2, h3 {
-    @apply font-serif text-[var(--color-accent)];
+  h1, h2, h3, h4 {
+    @apply font-serif text-[var(--color-accent)] leading-tight;
   }
 
-  /* Links e Botões de Ação */
-  .btn-primary {
-    @apply bg-[var(--color-accent)] text-white px-6 py-3 rounded-md transition-all hover:bg-[var(--color-primary)] font-semibold uppercase tracking-wider;
+  /* Scrollbar Customizada (Opcional - Para combinar com o Luxo) */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-offwhite;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/30 rounded-full hover:bg-primary/50 transition-colors;
   }
 }
 
 @keyframes bounce-slow {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-8px); }
 }
