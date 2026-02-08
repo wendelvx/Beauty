@@ -1,4 +1,4 @@
-import { Sparkles, Activity, Target, Zap, ChevronRight, Wind } from 'lucide-react';
+import { Activity, Target, Zap, ChevronRight, Wind } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function Services() {
@@ -37,21 +37,23 @@ export default function Services() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.15 }
+      transition: { 
+        staggerChildren: 0.08, // Reduzido para 0.08 para rapidez no toque
+        delayChildren: 0.1 
+      }
     }
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 15 }, // Deslocamento menor (15px) evita a sensação de "subida pesada"
     visible: { 
       opacity: 1, 
       y: 0, 
-      transition: { duration: 0.6, ease: "easeOut" } 
+      transition: { duration: 0.5, ease: "easeOut" } 
     }
   };
 
   const scrollToAssessment = () => {
-    // Apontando para #agendamento conforme definido no App.jsx
     const element = document.getElementById('agendamento');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -59,44 +61,44 @@ export default function Services() {
   };
 
   return (
-    <section id="servicos" className="py-24 bg-offwhite">
+    <section id="servicos" className="py-16 md:py-24 bg-offwhite">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Cabeçalho Técnico */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="flex flex-col items-center text-center mb-20"
+          viewport={{ once: true, amount: 0.3 }}
+          className="flex flex-col items-center text-center mb-12 md:mb-20"
         >
           <span className="font-sans text-primary uppercase tracking-[0.4em] text-[10px] font-bold mb-4">
             Especialidades Terapêuticas
           </span>
           
-          <h2 className="font-serif text-4xl md:text-5xl text-accent mb-6">
+          <h2 className="font-serif text-3xl md:text-5xl text-accent mb-6 leading-tight">
             Soluções para um <span className="italic text-primary">corpo em alta performance</span>
           </h2>
-          <p className="font-sans text-accent/70 max-w-2xl mx-auto leading-relaxed">
+          <p className="font-sans text-accent/70 max-w-2xl mx-auto leading-relaxed text-sm md:text-base">
             Dor não é normal. Nossos tratamentos são desenhados para devolver a mobilidade 
             e o bem-estar que o seu estilo de vida exige.
           </p>
         </motion.div>
 
-        {/* Grade de Serviços */}
+        {/* Grade de Serviços com Gatilho Rápido */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, amount: 0.1 }} // Ativa com apenas 10% de visibilidade
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
         >
           {services.map((service, index) => (
             <motion.div 
               key={index}
               variants={cardVariants}
-              className="group bg-white p-10 rounded-[2.5rem] border border-accent/5 shadow-sm hover:shadow-2xl hover:shadow-accent/5 transition-all duration-500 flex flex-col h-full"
+              className="group bg-white p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] border border-accent/5 shadow-sm transition-all duration-500 flex flex-col h-full"
             >
-              <div className="bg-offwhite w-14 h-14 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-inner">
+              <div className="bg-offwhite w-12 h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center text-primary mb-6 md:mb-8 shadow-inner">
                 {service.icon}
               </div>
               
@@ -114,20 +116,21 @@ export default function Services() {
 
               <button 
                 onClick={scrollToAssessment}
-                className="mt-10 flex items-center justify-between w-full p-4 rounded-xl border border-accent/5 bg-offwhite/50 text-accent font-sans text-[10px] font-bold uppercase tracking-widest group-hover:bg-accent group-hover:text-white transition-all duration-300 cursor-pointer"
+                className="mt-8 md:mt-10 flex items-center justify-between w-full p-4 rounded-xl border border-accent/5 bg-offwhite/50 text-accent font-sans text-[10px] font-bold uppercase tracking-widest active:bg-accent active:text-white transition-all duration-300"
               >
                 {service.cta}
-                <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                <ChevronRight size={14} />
               </button>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Nota Técnica de Rodapé da Seção */}
+        {/* Nota Técnica */}
         <motion.p 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 0.5 }}
-          className="text-center mt-16 font-sans text-[9px] uppercase tracking-[0.3em] text-accent"
+          viewport={{ once: true }}
+          className="text-center mt-12 md:mt-16 font-sans text-[9px] uppercase tracking-[0.3em] text-accent px-4"
         >
           *Todos os procedimentos são precedidos por avaliação clínica rigorosa.
         </motion.p>
